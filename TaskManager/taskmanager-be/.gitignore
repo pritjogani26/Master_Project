@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Static files (optional: if collected)
+staticfiles/
+
+# Migrations (optional: keep if needed)
+**/migrations/*
+!**/migrations/__init__.py
+
+# IDEs & editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing / coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Logs
+*.log
+
+# Celery / Redis
+celerybeat-schedule
+celerybeat.pid
+
+# Node (if using frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker (optional)
+*.pid
+*.seed
+*.pid.lock
+
+# Pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# Ruff / linters
+.ruff_cache/
+
+# Build files
+dist/
+build/
+*.egg-info/
+
+# Secrets
+secrets.json
