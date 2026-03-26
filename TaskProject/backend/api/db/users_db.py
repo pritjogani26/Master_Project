@@ -150,3 +150,35 @@ def user_has_assigned_tasks(user_id) -> bool:
         cur.execute("SELECT fn_user_has_assigned_tasks(%s)", [user_id])
         row = cur.fetchone()
     return bool(row[0]) if row else False
+
+def get_active_role_codes():
+    with connection.cursor() as cur:
+        cur.execute("""
+            SELECT role_code
+            FROM portal_role_master
+            WHERE is_active = TRUE
+            ORDER BY id
+        """)
+        rows = cur.fetchall()
+
+    return [row[0] for row in rows]
+
+def get_active_roles():
+    with connection.cursor() as cur:
+        cur.execute("""
+            SELECT id, role_code, label, is_active
+            FROM portal_role_master
+            WHERE is_active = TRUE
+            ORDER BY id
+        """)
+        rows = cur.fetchall()
+
+    return [
+        {
+            "id": row[0],
+            "role_code": row[1],
+            "label": row[2],
+            "is_active": row[3],
+        }
+        for row in rows
+    ]

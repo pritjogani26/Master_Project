@@ -38,7 +38,7 @@
 // // //   login: (email: string, password: string) => Promise<void>;
 // // //   logout: () => Promise<void>;
 // // //   refreshUser: () => Promise<void>;
-// // //   /** Used by SSO flows (e.g. Google) to set auth state directly. */
+// // //   /** Used by  flows (e.g. Google) to set auth state directly. */
 // // //   setAuthUser: (user: AuthUser, token: string) => void;
 // // //   /** Scenario B — register a form to have its state snapshot + restored. */
 // // //   registerRestorableForm: (

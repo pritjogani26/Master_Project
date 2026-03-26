@@ -30,7 +30,7 @@ import CreateAdminPage from "./pages/CreateAdminPage";
 import AccessControlPage from "./pages/superuser/AccessControlPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import { getFirstAllowedRoute } from "./utils/routeAccess";
-
+import PortalLaunchPage from "./pages/PortalLaunchPage";
 
 type AppRouteConfig = {
   path?: string;
@@ -155,6 +155,7 @@ function renderProtectedRoute(route: AppRouteConfig, key: string) {
 
   return <Route key={key} path={route.path} element={wrappedElement} />;
 }
+
 function AdminDefaultRedirect() {
   const { user, pages } = useAuth();
   return <Navigate to={getFirstAllowedRoute(user?.role, pages)} replace />;
@@ -164,13 +165,17 @@ function UserDefaultRedirect() {
   const { user, pages } = useAuth();
   return <Navigate to={getFirstAllowedRoute(user?.role, pages)} replace />;
 }
+
 export default function App() {
+ 
   const { user, pages } = useAuth();
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/set-password" element={<SetPassword />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+
       <Route
         path="/superuser"
         element={
@@ -217,6 +222,8 @@ export default function App() {
           renderProtectedRoute(route, `user-${route.path ?? "index"}-${index}`)
         )}
       </Route>
+
+      <Route path="/portal/consume-launch" element={<PortalLaunchPage />} />
 
       <Route
         path="*"

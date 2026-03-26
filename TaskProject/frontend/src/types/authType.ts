@@ -10,19 +10,23 @@ export type AuthUser = {
 export type PermissionMap = Record<string, boolean>;
 export type PageAccessMap = Record<string, boolean>;
 
-export type AuthContextValue = {
+export interface AuthContextValue {
   user: AuthUser | null;
   access: string | null;
   refresh: string | null;
   permissions: PermissionMap;
   pages: PageAccessMap;
   isInitializing: boolean;
+  masterUserId: number | null;
+  masterSessionToken: string | null;
   login: (
     newAccess: string,
     newRefresh: string,
     newUser: AuthUser,
     newPermissions?: PermissionMap,
-    newPages?: PageAccessMap
+    newPages?: PageAccessMap,
+    newMasterUserId?: number | null,
+    newMasterSessionToken?: string | null
   ) => void;
   setAccess: React.Dispatch<React.SetStateAction<string | null>>;
   setRefresh: React.Dispatch<React.SetStateAction<string | null>>;

@@ -17,3 +17,27 @@ def user_exists(user_id: int) -> bool:
 def revoke_refresh_token(token_hash: str) -> None:
     with connection.cursor() as cur:
         cur.callproc("sp_auth_revoke_refresh_token", [token_hash])
+
+
+def get_user_by_id(user_id: int):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            SELECT id, name, email, role
+            FROM users
+            WHERE id = %s
+            LIMIT 1
+            """,
+            [user_id],
+        )
+        row = cursor.fetchone()
+
+    if not row:
+        return None
+
+    return {
+        "id": row[0],
+        "name": row[1],
+        "email": row[2],
+        "role": row[3],
+    }        

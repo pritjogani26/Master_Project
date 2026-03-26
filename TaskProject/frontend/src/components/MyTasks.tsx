@@ -38,7 +38,7 @@ export default function MyTasks() {
   const downloadAttachment = async (a: Attachment) => {
     try {
       const access = localStorage.getItem("access");
-      const url = `http://127.0.0.1:8000${a.download_url}`;
+      const url = `http://127.0.0.1:8001${a.download_url}`;
 
       const res = await axios.get(url, {
         responseType: "blob",

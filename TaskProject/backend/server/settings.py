@@ -123,8 +123,10 @@ JWT_ALG = "HS256"
 JWT_EXP_HOURS = 6
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    # "http://localhost:5173",
+    # "http://127.0.0.1:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5174",
 ]
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
@@ -147,7 +149,7 @@ REST_FRAMEWORK = {
 
 }
 
-FRONTEND_URL = "http://localhost:5173"
+FRONTEND_URL = "http://localhost:5174"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"

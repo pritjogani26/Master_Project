@@ -111,7 +111,9 @@ export default function Login() {
                     res.data.refresh,
                     res.data.user,
                     res.data.permissions || {},
-                    res.data.pages || {}
+                    res.data.pages || {},
+                    res.data.master_user_id ?? null,
+                    res.data.master_session_token ?? null
                   );
                 } catch (err: any) {
                   if (axios.isAxiosError(err)) {
@@ -176,7 +178,9 @@ export default function Login() {
                           data.refresh,
                           data.user,
                           data.permissions || {},
-                          data.pages || {}
+                          data.pages || {},
+                          data.master_user_id ?? null,
+                          data.master_session_token ?? null
                         );
                       }}
                     />

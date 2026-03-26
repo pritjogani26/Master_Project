@@ -1,13 +1,13 @@
 // src/components/GoogleLoginButton.tsx
 import { useEffect, useRef } from "react";
 import { api } from "../api/api";
-import type { AuthUser } from "../types/authType";
+import type { AuthUser, PermissionMap, PageAccessMap } from "../types/authType";
 
 declare global {
   interface Window {
     google?: any;
   }
-  
+
   interface ImportMeta {
     readonly env: {
       readonly VITE_GOOGLE_CLIENT_ID: string;
@@ -16,11 +16,13 @@ declare global {
 }
 
 type GoogleAuthData = {
-  pages: {};
-  permissions: {};
+  pages: PageAccessMap;
+  permissions: PermissionMap;
   access: string;
   refresh: string;
   user: AuthUser;
+  master_user_id?: number | null;
+  master_session_token?: string | null;
 };
 
 type Props = {
@@ -48,7 +50,7 @@ export default function GoogleLoginButton({ onSuccess }: Props) {
     const init = () => {
       if (!mounted || !window.google?.accounts?.id || !btnRef.current) return;
 
-    
+
       btnRef.current.innerHTML = "";
 
       window.google.accounts.id.initialize({
@@ -61,6 +63,10 @@ export default function GoogleLoginButton({ onSuccess }: Props) {
               access: res.data.access,
               refresh: res.data.refresh,
               user: res.data.user,
+              permissions: res.data.permissions || {},
+              pages: res.data.pages || {},
+              master_user_id: res.data.master_user_id ?? null,
+              master_session_token: res.data.master_session_token ?? null,
             });
           } catch (e: any) {
             console.error(e?.response?.data || e);

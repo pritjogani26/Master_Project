@@ -1,6 +1,7 @@
 from django.urls import path
 from api.views.admin_dashboard import AdminDashboardView
 from api.views.auth import LoginView, RefreshAccessTokenView, LogoutView
+from api.views.portal_launch import PortalLaunchOptionsView
 from api.views.users import (
     CreateUserView,
     ListUsersView,
@@ -36,7 +37,7 @@ from api.views.user_project_views import (
 from api.views.access_control import access_control_view
 from api.views.admin_activity_export import AdminActivityExportView
 from api.views.attachments import DownloadAttachmentView, TaskAttachmentsView
-
+from api.views.portal_launch import PortalLaunchOptionsView, ConsumePortalLaunchView
 urlpatterns = [
     # --- AUTH ---
     path("auth/login/", LoginView.as_view(), name="login"),
@@ -124,5 +125,16 @@ urlpatterns = [
 
     path("my-activity/", MyActivityView.as_view(), name="my-activity"),
 
-    path("admin/activity/export/", AdminActivityExportView.as_view(), name="admin-activity-export")
+    path("admin/activity/export/", AdminActivityExportView.as_view(), name="admin-activity-export"),
+
+    path(
+    "portal/launch-options/",
+    PortalLaunchOptionsView.as_view(),
+    name="portal-launch-options",
+),
+path(
+    "portal/consume-launch/",
+    ConsumePortalLaunchView.as_view(),
+    name="portal-consume-launch",
+),
 ]

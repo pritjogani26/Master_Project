@@ -1,10 +1,11 @@
 from rest_framework import serializers
+from api.db import users_db
 
 
 class CreateUserSerializer(serializers.Serializer):
     name = serializers.CharField(required=True, allow_blank=False, max_length=255)
     email = serializers.EmailField(required=True)
-    role = serializers.ChoiceField(choices=["ADMIN", "USER"], required=False, default="USER")
+    role = serializers.CharField(required=False, default="USER")
 
     def validate_name(self, value):
         value = value.strip()
@@ -16,7 +17,13 @@ class CreateUserSerializer(serializers.Serializer):
         return value.strip().lower()
 
     def validate_role(self, value):
-        return value.strip().upper()
+        value = value.strip().upper()
+
+        valid_roles = users_db.get_active_role_codes()
+        if value not in valid_roles:
+            raise serializers.ValidationError("Invalid role selected")
+
+        return value
 
 
 class SendResetLinkSerializer(serializers.Serializer):
@@ -55,9 +62,29 @@ class SetPasswordFromTokenSerializer(serializers.Serializer):
             })
         return attrs
 
+
 class UserUpdateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=255, required=True)
     email = serializers.EmailField(required=True)
-    role = serializers.ChoiceField(choices=["ADMIN", "USER"], required=True)
-    
-    
+    role = serializers.CharField(required=True)
+
+    def validate_name(self, value):
+        value = value.strip()
+        if not value:
+            raise serializers.ValidationError("Name is required")
+        return value
+
+    def validate_email(self, value):
+        value = value.strip().lower()
+        if not value:
+            raise serializers.ValidationError("Email is required")
+        return value
+
+    def validate_role(self, value):
+        value = value.strip().upper()
+
+        valid_roles = users_db.get_active_role_codes()
+        if value not in valid_roles:
+            raise serializers.ValidationError("Invalid role selected")
+
+        return value

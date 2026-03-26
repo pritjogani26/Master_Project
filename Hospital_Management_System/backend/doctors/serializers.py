@@ -362,9 +362,9 @@ class DoctorListSerializer(serializers.Serializer):
     is_active = serializers.BooleanField()
     verification_status = serializers.CharField()
     verification_notes = serializers.CharField(allow_blank=True, allow_null=True)
-    verified_at = serializers.DateTimeField()
+    verified_at = serializers.DateTimeField(allow_null=True)
     created_at = serializers.DateTimeField()
-    updated_at = serializers.DateTimeField()
+    updated_at = serializers.DateTimeField(allow_null=True)
     gender = serializers.CharField()
     verified_by_id = serializers.UUIDField(required=False, allow_null=True)
     verified_by_email = serializers.EmailField(

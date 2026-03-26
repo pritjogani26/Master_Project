@@ -14,6 +14,8 @@ class JwtAuthMiddleware:
             "/api/auth/send-reset-link/",
             "/api/auth/google/",
             "/api/auth/refresh/",
+            "/api/portal/launch-options/",
+            "/api/portal/consume-launch/",
         }
 
     def __call__(self, request):

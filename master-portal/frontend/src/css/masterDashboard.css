@@ -1,0 +1,118 @@
+.master-dashboard-page {
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+  min-height: 100vh;
+}
+
+.dashboard-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 30px rgba(17, 38, 146, 0.08);
+  border: 1px solid #eef1f7;
+  gap: 20px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1f2d3d;
+}
+
+.dashboard-subtitle {
+  color: #6c757d;
+  font-size: 15px;
+}
+
+.add-module-btn {
+  border-radius: 12px !important;
+  padding: 10px 18px !important;
+  font-weight: 600 !important;
+}
+
+.master-user-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eef1f7;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  color: #2d3748;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.module-card {
+  border-radius: 20px !important;
+  transition: all 0.25s ease-in-out;
+  overflow: hidden;
+}
+
+.module-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12) !important;
+}
+
+.module-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #edf3ff 0%, #dbeafe 100%);
+  color: #0d6efd;
+}
+
+.empty-state {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px dashed #cfd8e3;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 768px) {
+  .dashboard-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-module-btn {
+    width: 100%;
+  }
+}
+
+.launch-module-box {
+  background: #f8f9ff;
+  border: 1px solid #e7ecff;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.launch-role-option {
+  border: 1px solid #e9ecef;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.launch-role-option:hover {
+  border-color: #0d6efd;
+  background: #f8fbff;
+}
+
+.launch-role-option.active {
+  border-color: #0d6efd;
+  background: rgba(13, 110, 253, 0.08);
+  box-shadow: 0 8px 18px rgba(13, 110, 253, 0.08);
+}

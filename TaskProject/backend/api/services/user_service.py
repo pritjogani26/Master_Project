@@ -16,6 +16,10 @@ def create_user_service(data):
     email = data["email"]
     role = data["role"]
 
+    valid_roles = users_db.get_active_role_codes()
+    if role not in valid_roles:
+        raise BadRequestError("Invalid role selected")
+
     if users_db.user_exists_by_email(email):
         raise ConflictError({"message": "User already exists.", "email": email})
 
@@ -45,7 +49,8 @@ def list_users_service(params):
     if page_size > 100:
         page_size = 100
 
-    if role not in (None, "USER", "ADMIN", "SUPERUSER"):
+    valid_roles = users_db.get_active_role_codes()
+    if role is not None and role not in valid_roles:
         raise BadRequestError("Invalid role filter")
 
     offset = (page - 1) * page_size
@@ -75,7 +80,6 @@ def list_users_service(params):
         "total_pages": total_pages,
         "role_filter": role,
     }
-
 
 def send_reset_link_service(data):
     email = data["email"]
@@ -155,6 +159,11 @@ def update_user_service(current_user, current_user_id, target_user_id, data):
     name = data["name"].strip()
     email = data["email"].strip().lower()
     role = data["role"].strip().upper()
+
+
+    valid_roles = users_db.get_active_role_codes()
+    if role not in valid_roles:
+        raise BadRequestError("Invalid role selected")
 
     existing = users_db.get_user_by_id(target_user_id)
     if not existing:
