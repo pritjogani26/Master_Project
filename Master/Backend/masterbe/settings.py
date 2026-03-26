@@ -37,9 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     "corsheaders",
+    'rest_framework',
+    'myapp',
+
 ]
 
 MIDDLEWARE = [
+        "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,3 +136,28 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100
 }
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+
+   "AUTH_HEADER_TYPES": ("Bearer",), 
+}
+# JWT Cookie Security
+# --- JWT COOKIE SETTINGS ---
+JWT_COOKIE_HTTPONLY = True
+JWT_COOKIE_SECURE = False   # Keep False for local HTTP, change to True in production
+JWT_COOKIE_SAMESITE = "Lax" # Change to "None" ONLY in production with Secure=True
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://example.com",
+]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOW_CREDENTIALS = True
+
